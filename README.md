@@ -7,7 +7,7 @@
 - CRUD operations (create, read, update, delete)
 
 ## Requirements:
-- Python 3.7 
+- Python 3.8, pymysql 1.0.3 
 - "pip install pymysql" on command line (pip is automatically installed if using a Virtual Environment). In Python 3.4 or higher, pip in automatically built-in.
 - Or in anaconda prompt: "conda install pymysql"
 - "pip install neo4j"
