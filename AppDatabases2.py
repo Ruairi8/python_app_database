@@ -4,6 +4,7 @@ import pymysql
 
 def connect():
     global conn
+    # Establishing a connection:
     conn=pymysql.connect(host="localhost", user="root", password="root", db="employees", cursorclass=pymysql.cursors.DictCursor)
 	
 def function():
@@ -14,9 +15,12 @@ def function():
 def choice1():
     conn=pymysql.connect(host="localhost", user="root", password="root", db="employees", cursorclass=pymysql.cursors.DictCursor)
     with conn:
+        # Creating a cursor object:
         cursor = conn.cursor()
         query = "SELECT DISTINCT a.name AS N1, b.name AS N2 FROM employee a JOIN dept b ON a.did = b.did ORDER BY b.name;"
+        # Executing the SQL statement:
         cursor.execute(query)
+        # Specifying a size of two returns two rows in the results:
         rows = cursor.fetchmany(size=2)
         for row in rows:
             print(row["N1"] + " | " + row["N2"])
@@ -28,6 +32,7 @@ def choice2():
         cursor = conn.cursor()
         query = "SELECT DISTINCT a.name AS N1, b.name AS N2 FROM employee a JOIN dept b ON a.did = b.did ORDER BY b.name;"
         cursor.execute(query)
+        # 'fetchall()' returns all rows of the results as a list of tuples:
         x = cursor.fetchall()
         for i in range(0, len(x), 2):
             for row in x[i:i+2]:
@@ -135,7 +140,7 @@ def viewDept():
         else:
             print("Department   |   Budget")
 
-# neo4j package required installation from pip: "Successfully installed neo4j-5.8.0"
+# neo4j package required installation from pip:
 from neo4j import GraphDatabase
 
 driver = None

@@ -5,9 +5,11 @@ import pymysql
 conn = None
 def connect():
     global conn
+    # This cursorclass returns the results as a dictionary:
     conn = pymysql.connect(host="localhost", user="root", password="root", db="employees", cursorclass=pymysql.cursors.DictCursor)
 
 def choice1():
+    # Using SQL query: 
     query = "SELECT Employee Name, Department Name FROM employees"
     with conn:
         cursor = conn.cursor()
