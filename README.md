@@ -25,13 +25,13 @@ pip install neo4j
 A connection to MySQL, see [azure](https://learn.microsoft.com/en-us/azure/mysql/single-server/connect-workbench)
 The MySQL workbench can be got via Azure labs or Wampserver for example.
 
-### Download MySQL on Windowns:
+### Download MySQL on Windows:
 The default installation directory is <b>C:\Program Files\MySQL\MySQL Server 8.0</b> for installations performed with MySQL Installer. 
 MySQL Installer requires Microsoft .NET Framework 4.5.2 or later.
-To invoke MySQL Installer after a successful installation:
+To invoke MySQL Installer after a successful installation:<br>
 Right-click Windows Start, select Run, and then click Browse. Navigate to Program Files (x86) > MySQL > MySQL Installer for Windows to open the program folder.
 
-Select one of the following files:
+Select one of the following files:<br>
 <b>MySQLInstaller.exe</b> to open the graphical application.<br>
 <b>MySQLInstallerConsole.exe</b> to open the command-line application.
 
