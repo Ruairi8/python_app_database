@@ -1,0 +1,62 @@
+# MySQL queries I used to extract info from a database for Applied Databases project:
+-> SELECT distinct a.Name, FORMAT(a.population, 0) AS Population, b.Continent from city a
+->JOIN country b ON a.CountryCode = b.CountryCode
+->WHERE a.Population > 8000000
+->GROUP BY a.Name
+->ORDER BY a.Population DESC;
+
+->SELECT Nmae, SUBSTRING(GovernmentForm,1, 10) AS Government FROM country
+->JOIN countrylanguage ON Code = CountryCode
+->WHERE language = "German" AND IsOfficial = "T"
+->ORDER BY name;
+
+->SELECT a.Name AS Capital, b.Name AS Country, c.Language, c.Percentage FROM city a
+->JOIN country b ON a.ID = b.Capital
+->JOIN countrylanguage c ON a.CountryCode = c.CountryCode
+->WHERE Continent = "Europe" AND IsOfficial = "T"
+->ORDER BY Country, Capital, Language
+
+->SELECT a.Name, d.dateArrived, c.Name FROM city a
+->LEFT JOIN hasvisitedcity b ON a.ID = b.cityID
+->LEFT JOIN country c ON a.CountryCode = c.Code
+->LEFT JOIN person d ON b.personID = d.personID
+->WHERE d.personname LIKE "Sara"
+->ORDER BY a.Name;
+
+->SELECT SUM (a.GNP) AS Total_GNP FROM country a
+->JOIN city b ON a.Code = b.CountryCode
+->JOIN hasvisitedcity c ON b.ID = c.cityID
+->WHERE c.personID = "1";
+
+->SELECT a.Name as name, a.Population as population FROM city a
+->JOIN country b ON a.CountryCode = b.Code
+->WHERE b.HeadOfState LIKE "Harold V" AND a.Population > (SELECT AVG(a.Population) FROM city a
+->JOIN country b ON a.CountryCode = b.Code
+->WHERE b.HeadOfState LIKE "Harold v")
+->ORDER BY a.Name, a Population DESC;
+
+# Cypher queries (used to interact with a Neo4j database):
+->MATCH(a:Person{age:54})
+->WHERE exists(a.age) 
+->RETURN DISTINCT exists(a.age) AS Aged54
+
+->MATCH(a.Person) 
+->WHERE a.age IS NOT NULL
+->RETURN DISTINCT a.age AS Ages_Of_People
+->ORDER BY Ages_Of_People
+
+->MATCH(a.Person)-[:PLAYS]->
+->WHERE EXISTS {MATCH(a.Person)-[:PLAYS]->(:Instrument{name:"Guitar"}) AND b.name <> "Guitar"
+->RETURN DISTINCT b.name AS Other_Hobbies
+->ORDER BY b.name
+
+->MATCH(a)<-[:HAS_HOBBY]-(b) 
+->RETURN a.name AS Hobby, count(b.name) AS People
+->ORDER BY People, Hobby
+
+->MATCH(a.Person{name:"Barbara Smith})<-[:MOTHER_OF]-()<-[:MOTHER_OF]-(b)-[:HAS_HOBBY]->(c)
+->WITH c.name AS MaternalGransHobby 
+->MATCH(a1:Person)-[:HAS_HOBBY]->(c1) 
+->WHERE c1.name = MaternalGransHobby AND a1.name <> "Bridget Jones"
+->RETURN a1.name AS Names, a1.age AS Ages
+->ORDER BY Names, Ages

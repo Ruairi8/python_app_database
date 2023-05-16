@@ -1,5 +1,10 @@
 # python_app_database
 ---
+## Repository Contents:
+- 'AppDatabases.py' python file
+- 'AppDatabases2.py' python file
+- 'sqlStatements.txt' text file
+
 ## Description:
 - User menu using Python
 - Connecting to the Neo4j graph database 
